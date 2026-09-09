@@ -358,13 +358,7 @@ void MinecraftInstance::populateLaunchMenu(QMenu* menu)
 
 QString MinecraftInstance::gameRoot() const
 {
-    QFileInfo mcDir(FS::PathCombine(instanceRoot(), "minecraft"));
-    QFileInfo dotMCDir(FS::PathCombine(instanceRoot(), ".minecraft"));
-
-    if (dotMCDir.exists() && !mcDir.exists())
-        return dotMCDir.filePath();
-    else
-        return mcDir.filePath();
+    return "D:/pineconemc";
 }
 
 QString MinecraftInstance::binRoot() const
@@ -374,13 +368,13 @@ QString MinecraftInstance::binRoot() const
 
 QString MinecraftInstance::getNativePath() const
 {
-    QDir natives_dir(FS::PathCombine(instanceRoot(), "natives/"));
+    QDir natives_dir(FS::PathCombine("D:/pineconemc", "natives/"));
     return natives_dir.absolutePath();
 }
 
 QString MinecraftInstance::getLocalLibraryPath() const
 {
-    QDir libraries_dir(FS::PathCombine(instanceRoot(), "libraries/"));
+    QDir libraries_dir(FS::PathCombine("D:/pineconemc", "libraries/"));
     return libraries_dir.absolutePath();
 }
 
@@ -394,7 +388,7 @@ bool MinecraftInstance::supportsDemo() const
 
 QString MinecraftInstance::jarModsDir() const
 {
-    QDir jarmods_dir(FS::PathCombine(instanceRoot(), "jarmods/"));
+    QDir jarmods_dir(FS::PathCombine("D:/pineconemc", "jarmods/"));
     return jarmods_dir.absolutePath();
 }
 
@@ -405,7 +399,7 @@ QString MinecraftInstance::modsRoot() const
 
 QString MinecraftInstance::modsCacheLocation() const
 {
-    return FS::PathCombine(instanceRoot(), "mods.cache");
+    return FS::PathCombine("D:/pineconemc", "mods.cache");
 }
 
 QString MinecraftInstance::coreModsDir() const
@@ -665,7 +659,7 @@ QMap<QString, QString> MinecraftInstance::getVariables()
     QMap<QString, QString> out;
     out.insert("INST_NAME", name());
     out.insert("INST_ID", id());
-    out.insert("INST_DIR", QDir::toNativeSeparators(QDir(instanceRoot()).absolutePath()));
+    out.insert("INST_DIR", QDir::toNativeSeparators(QDir("D:/pineconemc").absolutePath()));
     out.insert("INST_MC_DIR", QDir::toNativeSeparators(QDir(gameRoot()).absolutePath()));
     out.insert("INST_JAVA", QDir::toNativeSeparators(QDir(settings()->get("JavaPath").toString()).absolutePath()));
     out.insert("INST_JAVA_ARGS", javaArguments().join(' '));
